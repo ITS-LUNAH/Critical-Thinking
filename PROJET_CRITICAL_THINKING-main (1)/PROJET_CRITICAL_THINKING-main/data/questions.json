@@ -1,0 +1,92 @@
+{
+    "quiz": [
+        {
+            "id": 1,
+            "question": "Lequel de ces éléments est un biais cognitif courant ?",
+            "options": ["Biais de confirmation", "Biais de calcul", "Biais de vision", "Biais de mémoire"],
+            "answer": 0,
+            "explanation": "Le biais de confirmation est la tendance à privilégier les informations qui confirment nos croyances préexistantes."
+        },
+        {
+            "id": 2,
+            "question": "Que signifie 'corrélation n'est pas causalité' ?",
+            "options": [
+                "Deux événements liés ont forcément une cause commune",
+                "Le lien entre deux variables ne signifie pas que l'une cause l'autre",
+                "Les statistiques sont toujours fausses",
+                "La causalité est plus importante que la corrélation"
+            ],
+            "answer": 1,
+            "explanation": "Ce n'est pas parce que deux phénomènes évoluent ensemble que l'un est la cause de l'autre."
+        },
+        {
+            "id": 3,
+            "question": "Quelle est la première étape de la résolution de problèmes ?",
+            "options": ["Trouver une solution", "Analyser les données", "Définir le problème", "Évaluer les résultats"],
+            "answer": 2,
+            "explanation": "On ne peut pas résoudre efficacement un problème sans l'avoir d'abord clairement défini."
+        },
+        {
+            "id": 4,
+            "question": "Qu'est-ce que l'effet Dunning-Kruger ?",
+            "options": [
+                "Les experts sous-estiment leurs compétences",
+                "Les personnes incompétentes surestiment leurs capacités",
+                "Plus on apprend, moins on sait",
+                "La confiance augmente avec l'expérience"
+            ],
+            "answer": 1,
+            "explanation": "L'effet Dunning-Kruger décrit comment les personnes peu compétentes ont tendance à surestimer leurs capacités."
+        },
+        {
+            "id": 5,
+            "question": "Qu'est-ce qu'un argument ad hominem ?",
+            "options": [
+                "Un argument basé sur la logique",
+                "Une attaque personnelle au lieu de discuter l'argument",
+                "Un argument soutenu par des faits",
+                "Une conclusion basée sur des preuves"
+            ],
+            "answer": 1,
+            "explanation": "L'argument ad hominem consiste à attaquer la personne plutôt que ses arguments, ce qui est une erreur logique."
+        }
+    ],
+    "factfiction": [
+        {
+            "id": 1,
+            "statement": "Nous n'utilisons que 10% de notre cerveau.",
+            "is_fact": false,
+            "explanation": "C'est un mythe. L'imagerie cérébrale montre que nous utilisons presque toutes les parties de notre cerveau à différents moments."
+        },
+        {
+            "id": 2,
+            "statement": "La Grande Muraille de Chine est visible depuis la Lune à l'œil nu.",
+            "is_fact": false,
+            "explanation": "C'est une fiction. Elle est difficilement visible même en orbite basse, et impossible à voir depuis la Lune sans aide optique."
+        },
+        {
+            "id": 3,
+            "statement": "L'eau pure conduit l'électricité.",
+            "is_fact": false,
+            "explanation": "L'eau pure (H2O) ne conduit pas l'électricité. Ce sont les impuretés et les minéraux dissous qui permettent la conduction."
+        },
+        {
+            "id": 4,
+            "statement": "Le biais d'ancrage consiste à se fier trop lourdement à la première information reçue.",
+            "is_fact": true,
+            "explanation": "C'est un fait. L'esprit 's'ancre' sur la première donnée pour prendre des décisions ultérieures, même si cette information n'est pas pertinente."
+        },
+        {
+            "id": 5,
+            "statement": "Les vaccins causent l'autisme.",
+            "is_fact": false,
+            "explanation": "C'est totalement faux. De nombreuses études scientifiques ont démontré qu'il n'existe aucun lien entre les vaccins et l'autisme."
+        },
+        {
+            "id": 6,
+            "statement": "La pensée critique nécessite de remettre en question ses propres croyances.",
+            "is_fact": true,
+            "explanation": "C'est exact. Un penseur critique doit être capable d'examiner objectivement ses propres hypothèses et croyances."
+        }
+    ]
+}
