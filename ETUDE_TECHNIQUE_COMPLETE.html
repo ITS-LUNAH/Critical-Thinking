@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Étude Technique - Projet Critical Thinking</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: white;
+            padding: 40px;
+        }
+
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px;
+            page-break-after: always;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .cover h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .cover p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin: 10px 0;
+        }
+
+        .cover .subtitle {
+            font-size: 1.1em;
+            opacity: 0.8;
+            margin-top: 30px;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin: 40px 0 30px 0;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 2em;
+            margin: 35px 0 20px 0;
+            border-left: 5px solid #667eea;
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin: 20px 0 15px 0;
+        }
+
+        h4 {
+            color: #2c3e50;
+            font-size: 1.1em;
+            margin: 15px 0 10px 0;
+            font-weight: 600;
+        }
+
+        p {
+            margin: 12px 0;
+            text-align: justify;
+            font-size: 0.95em;
+        }
+
+        .intro-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .intro-section p {
+            margin: 10px 0;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            border-left: 4px solid #667eea;
+            page-break-inside: avoid;
+        }
+
+        .code-comment {
+            color: #95a5a6;
+            font-style: italic;
+        }
+
+        .code-keyword {
+            color: #e74c3c;
+        }
+
+        .code-string {
+            color: #2ecc71;
+        }
+
+        .code-function {
+            color: #3498db;
+        }
+
+        .flow-diagram {
+            background: #f8f9fa;
+            padding: 20px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+            line-height: 2;
+        }
+
+        .flow-step {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+        }
+
+        .arrow {
+            color: #667eea;
+            font-size: 1.5em;
+            margin: 0 5px;
+        }
+
+        .explanation {
+            background: #f0f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        .explanation strong {
+            color: #667eea;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            border-bottom: 1px solid #ecf0f1;
+            padding: 12px;
+            font-size: 0.9em;
+        }
+
+        table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .key-point {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .list-item {
+            margin-left: 30px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .list-item:before {
+            content: "→";
+            position: absolute;
+            left: -20px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .game-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #f8f9fa 100%);
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+
+        .game-box h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            font-size: 0.9em;
+        }
+
+        .comparison-table td:first-child {
+            font-weight: 600;
+            background: #f8f9fa;
+            width: 20%;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 30px;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+            page-break-inside: avoid;
+        }
+
+        .toc h2 {
+            color: #667eea;
+            border: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+
+        .toc ol {
+            margin-left: 30px;
+        }
+
+        .toc li {
+            margin: 8px 0;
+            font-size: 0.95em;
+        }
+
+        .toc-item {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+            .page {
+                box-shadow: none;
+                margin-bottom: 0;
+                page-break-after: always;
+            }
+            .cover {
+                page-break-after: always;
+            }
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, #667eea, #764ba2, transparent);
+            margin: 40px 0;
+        }
+
+        .learning-objective {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .learning-objective strong {
+            color: #1976D2;
+        }
+    </style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page cover">
+    <h1>Étude Technique Complète</h1>
+    <p style="font-size: 2em; margin: 30px 0;">Projet Critical Thinking</p>
+    <p class="subtitle">Analyse détaillée des 4 jeux pédagogiques</p>
+    <p style="margin-top: 50px; font-size: 1em;">Une présentation technique complète de l'architecture,<br>la logique métier et l'implémentation des jeux</p>
+</div>
+
+<!-- PAGE 2: TABLE DES MATIÈRES -->
+<div class="page">
+    <div class="toc">
+        <h2>Table des matières</h2>
+        <ol>
+            <li><span class="toc-item">Introduction & Architecture Générale</span></li>
+            <li><span class="toc-item">Jeu 1: Challenge de Pensée Critique (Puzzle)</span></li>
+            <li><span class="toc-item">Jeu 2: Quiz de Pensée Critique</span></li>
+            <li><span class="toc-item">Jeu 3: Fait ou Fiction</span></li>
+            <li><span class="toc-item">Jeu 4: Mind Puzzle Challenge (À Venir)</span></li>
+            <li><span class="toc-item">Système d'Authentification</span></li>
+            <li><span class="toc-item">Gestion des Sessions & Scoring</span></li>
+            <li><span class="toc-item">Architecture Base de Données</span></li>
+            <li><span class="toc-item">Stack Technologique & Conclusion</span></li>
+        </ol>
+    </div>
+</div>
+
+<!-- PAGE 3: INTRODUCTION -->
+<div class="page">
+    <h1>Introduction & Architecture Générale</h1>
+    
+    <div class="learning-objective">
+        <strong>Objectif:</strong> Comprendre l'architecture globale du projet et le fonctionnement de chaque jeu
+    </div>
+
+    <h2>Vue d'ensemble du projet</h2>
+    
+    <div class="intro-section">
+        <h3>Qu'est-ce que Critical Thinking ?</h3>
+        <p>
+            Critical Thinking est une plateforme pédagogique interactive composée de 4 jeux différents,
+            conçus pour développer les compétences de pensée critique chez les utilisateurs. Chaque jeu
+            propose une approche unique pour améliorer le raisonnement, l'analyse et la prise de décision.
+        </p>
+    </div>
+
+    <h2>Architecture Générale (MVC)</h2>
+    
+    <p>
+        Le projet suit le pattern <strong>MVC (Model-View-Controller)</strong>:
+    </p>
+
+    <table>
+        <tr>
+            <th>Composant</th>
+            <th>Description</th>
+            <th>Responsabilité</th>
+        </tr>
+        <tr>
+            <td><strong>Model</strong></td>
+            <td>Game.php, Question.php, User.php</td>
+            <td>Gestion des données et logique métier</td>
+        </tr>
+        <tr>
+            <td><strong>View</strong></td>
+            <td>Fichiers .php dans app/views</td>
+            <td>Affichage de l'interface utilisateur</td>
+        </tr>
+        <tr>
+            <td><strong>Controller</strong></td>
+            <td>GameController.php</td>
+            <td>Orchestration entre Model et View</td>
+        </tr>
+    </table>
+
+    <div class="flow-diagram">
+        <div class="flow-step">Utilisateur</div>
+        <span class="arrow">→</span>
+        <div class="flow-step">Controller</div>
+        <span class="arrow">→</span>
+        <div class="flow-step">Model</div>
+        <span class="arrow">→</span>
+        <div class="flow-step">Database</div>
+        <br><br>
+        <div class="flow-step">View</div>
+        <span class="arrow">←</span>
+        <div class="flow-step">Controller</div>
+        <span class="arrow">←</span>
+        <div class="flow-step">Model</div>
+    </div>
+
+    <h2>Les 4 Jeux du Projet</h2>
+    
+    <table>
+        <tr>
+            <th>Jeu</th>
+            <th>Type</th>
+            <th>Objectif</th>
+            <th>Mécanique</th>
+        </tr>
+        <tr>
+            <td><strong>1. Puzzle</strong></td>
+            <td>Ordonnancement</td>
+            <td>Logique et organisation</td>
+            <td>Classer des étapes dans le bon ordre</td>
+        </tr>
+        <tr>
+            <td><strong>2. Quiz</strong></td>
+            <td>Choix multiple</td>
+            <td>Connaissances en pensée critique</td>
+            <td>Répondre à des questions à 4 options</td>
+        </tr>
+        <tr>
+            <td><strong>3. Fact/Fiction</strong></td>
+            <td>Binaire</td>
+            <td>Analyse critique et fact-checking</td>
+            <td>Identifier les faits vrais des fictions</td>
+        </tr>
+        <tr>
+            <td><strong>4. Mind Puzzle</strong></td>
+            <td>Déduction</td>
+            <td>Résolution de problèmes</td>
+            <td>Résoudre des énigmes logiques</td>
+        </tr>
+    </table>
+</div>
+
+<!-- PAGE 4: JEU 1 - PUZZLE -->
+<div class="page">
+    <h1>Jeu 1: Challenge de Pensée Critique</h1>
+    
+    <div class="learning-objective">
+        <strong>Type:</strong> Jeu d'ordonnancement | <strong>Mécanique:</strong> Classer les étapes dans le bon ordre
+    </div>
+
+    <h2>Description du Jeu</h2>
+    
+    <div class="intro-section">
+        <h3>Concept</h3>
+        <p>
+            L'utilisateur reçoit une situation (exemple: "Organiser un événement") avec plusieurs étapes
+            présentées dans un ordre aléatoire. Son défi est de les reclasser dans le <strong>bon ordre logique</strong>.
+        </p>
+    </div>
+
+    <h2>Logique Métier</h2>
+
+    <h3>1. Charger une Situation Aléatoire</h3>
+    
+    <div class="explanation">
+        <strong>Fonction:</strong> getRandomSituation() | <strong>Fichier:</strong> app/models/Game.php
+    </div>
+
+    <div class="code-block">
+<span class="code-keyword">public function</span> <span class="code-function">getRandomSituation</span>() {
+    <span class="code-comment">// Récupère une situation aléatoire de la base de données</span>
+    <span class="code-comment">// MySQL utilise RAND() pour randomiser l'ordre</span>
+    <span class="code-keyword">$stmt</span> = <span class="code-keyword">$this</span>-><span class="code-function">db</span>->query(
+        <span class="code-string">"SELECT * FROM situations ORDER BY RAND() LIMIT 1"</span>
+    );
+    
+    <span class="code-keyword">return</span> <span class="code-keyword">$stmt</span>->fetch();
+}
+    </div>
+
+    <div class="explanation">
+        <strong>Explication:</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">Utilise RAND() de MySQL pour obtenir une situation aléatoire</li>
+            <li class="list-item">LIMIT 1 récupère un seul résultat</li>
+            <li class="list-item">Le résultat est un tableau associatif contenant id, titre, description</li>
+        </ul>
+    </div>
+
+    <h3>2. Récupérer les Étapes Mélangées</h3>
+
+    <div class="code-block">
+<span class="code-keyword">public function</span> <span class="code-function">getStepsForSituation</span>(<span class="code-keyword">$situation_id</span>) {
+    <span class="code-comment">// Prépare la requête pour éviter les injections SQL</span>
+    <span class="code-keyword">$stmt</span> = <span class="code-keyword">$this</span>-><span class="code-function">db</span>->prepare(
+        <span class="code-string">"SELECT * FROM steps WHERE situation_id = ?"</span>
+    );
+    
+    <span class="code-comment">// Exécute la requête avec l'ID de la situation</span>
+    <span class="code-keyword">$stmt</span>->execute([<span class="code-keyword">$situation_id</span>]);
+    
+    <span class="code-comment">// Récupère tous les résultats</span>
+    <span class="code-keyword">$steps</span> = <span class="code-keyword">$stmt</span>->fetchAll();
+    
+    <span class="code-comment">// Mélange les étapes pour le jeu (ordre aléatoire)</span>
+    <span class="code-keyword">shuffle</span>(<span class="code-keyword">$steps</span>);
+    
+    <span class="code-keyword">return</span> <span class="code-keyword">$steps</span>;
+}
+    </div>
+
+    <div class="explanation">
+        <strong>Points clés:</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">Utilise prepare() et execute() pour sécuriser la requête</li>
+            <li class="list-item">shuffle() mélange le tableau des étapes</li>
+            <li class="list-item">Chaque situation possède plusieurs étapes avec un step_order</li>
+        </ul>
+    </div>
+
+    <h3>3. Vérifier l'Ordre Soumis</h3>
+
+    <div class="code-block">
+<span class="code-keyword">public function</span> <span class="code-function">checkOrder</span>(<span class="code-keyword">$situation_id</span>, <span class="code-keyword">$user_order</span>) {
+    <span class="code-comment">// Récupère les bonnes étapes dans l'ordre correct</span>
+    <span class="code-keyword">$stmt</span> = <span class="code-keyword">$this</span>-><span class="code-function">db</span>->prepare(
+        <span class="code-string">"SELECT id, step_order FROM steps 
+         WHERE situation_id = ? ORDER BY step_order ASC"</span>
+    );
+    <span class="code-keyword">$stmt</span>->execute([<span class="code-keyword">$situation_id</span>]);
+    <span class="code-keyword">$correct_steps</span> = <span class="code-keyword">$stmt</span>->fetchAll();
+    
+    <span class="code-keyword">$is_correct</span> = <span class="code-keyword">true</span>;
+    
+    <span class="code-comment">// Vérifie si chaque étape soumise correspond à la position correcte</span>
+    <span class="code-keyword">foreach</span> (<span class="code-keyword">$correct_steps</span> <span class="code-keyword">as</span> <span class="code-keyword">$index</span> => <span class="code-keyword">$correct_step</span>) {
+        <span class="code-comment">// Compare l'ID soumis avec l'ID correct</span>
+        <span class="code-keyword">if</span> (!isset(<span class="code-keyword">$user_order</span>[<span class="code-keyword">$index</span>]) || 
+            <span class="code-keyword">$user_order</span>[<span class="code-keyword">$index</span>] != <span class="code-keyword">$correct_step</span>['id']) {
+            <span class="code-keyword">$is_correct</span> = <span class="code-keyword">false</span>;
+            <span class="code-keyword">break</span>;
+        }
+    }
+    
+    <span class="code-keyword">return</span> <span class="code-keyword">$is_correct</span>;
+}
+    </div>
+
+    <div class="explanation">
+        <strong>Algorithme de vérification:</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">Récupère les étapes correctes triées par step_order</li>
+            <li class="list-item">Compare chaque position de la réponse avec la position correcte</li>
+            <li class="list-item">Retourne false dès qu'une erreur est détectée</li>
+            <li class="list-item">Nécessite une correspondance exacte et dans le bon ordre</li>
+        </ul>
+    </div>
+
+    <h2>Appel du Controller</h2>
+
+    <div class="code-block">
+<span class="code-keyword">public function</span> <span class="code-function">index</span>() {
+    <span class="code-comment">// Charge le modèle Game</span>
+    <span class="code-keyword">$gameModel</span> = <span class="code-keyword">$this</span>->model(<span class="code-string">'Game'</span>);
+    
+    <span class="code-comment">// Récupère une situation aléatoire</span>
+    <span class="code-keyword">$situation</span> = <span class="code-keyword">$gameModel</span>->getRandomSituation();
+    
+    <span class="code-comment">// Récupère les étapes mélangées pour cette situation</span>
+    <span class="code-keyword">$steps</span> = <span class="code-keyword">$gameModel</span>->getStepsForSituation(<span class="code-keyword">$situation</span>['id']);
+    
+    <span class="code-comment">// Passe les données à la vue</span>
+    <span class="code-keyword">$this</span>->view(<span class="code-string">'game/index'</span>, [
+        <span class="code-string">'situation'</span> => <span class="code-keyword">$situation</span>,
+        <span class="code-string">'steps'</span> => <span class="code-keyword">$steps</span>
+    ]);
+}
+    </div>
+
+    <h2>Flux du Jeu</h2>
+
+    <div class="flow-diagram">
+        <div class="flow-step">Accès au jeu</div>
+        <span class="arrow">→</span>
+        <div class="flow-step">Situation aléatoire</div>
+        <br><br>
+        <div class="flow-step">Étapes mélangées</div>
+        <span class="arrow">→</span>
+        <div class="flow-step">Affichage interactif</div>
+        <br><br>
+        <div class="flow-step">Joueur arrange</div>
+        <span class="arrow">→</span>
+        <div class="flow-step">Vérification</div>
+        <br><br>
+        <div class="flow-step">Résultat</div>
+        <span class="arrow">→</span>
+        <div class="flow-step">Score</div>
+    </div>
+</div>
+
+<!-- PAGE 5: JEU 2 - QUIZ -->
+<div class="page">
+    <h1>Jeu 2: Quiz de Pensée Critique</h1>
+    
+    <div class="learning-objective">
+        <strong>Type:</strong> Choix multiple | <strong>Mécanique:</strong> 4 réponses par question
+    </div>
+
+    <h2>Description du Jeu</h2>
+    
+    <div class="intro-section">
+        <h3>Concept</h3>
+        <p>
+            Un quiz classique où l'utilisateur doit choisir la <strong>bonne réponse parmi 4 options</strong>
+            pour chaque question. Les réponses sont validées en temps réel et le score est accumulé.
+        </p>
+    </div>
+
+    <h2>Données du Quiz</h2>
+
+    <div class="code-block">
+{
+    <span class="code-string">"quiz"</span>: [
+        {
+            <span class="code-string">"id"</span>: 1,
+            <span class="code-string">"question"</span>: <span class="code-string">"Lequel de ces éléments est un biais cognitif ?"</span>,
+            <span class="code-string">"options"</span>: [
+                <span class="code-string">"Biais de confirmation"</span>,
+                <span class="code-string">"Biais de calcul"</span>,
+                <span class="code-string">"Biais de vision"</span>,
+                <span class="code-string">"Biais de mémoire"</span>
+            ],
+            <span class="code-string">"answer"</span>: 0,
+            <span class="code-string">"explanation"</span>: <span class="code-string">"Le biais de confirmation est..."</span>
+        }
+    ]
+}
+    </div>
+
+    <div class="explanation">
+        <strong>Structure des données:</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">id: Identifiant unique de la question</li>
+            <li class="list-item">question: Le texte de la question</li>
+            <li class="list-item">options: Tableau de 4 réponses possibles</li>
+            <li class="list-item">answer: Index (0-3) de la bonne réponse</li>
+            <li class="list-item">explanation: Explication de la réponse correcte</li>
+        </ul>
+    </div>
+
+    <h2>Logique du Controller</h2>
+
+    <h3>1. Initialisation du Quiz</h3>
+
+    <div class="code-block">
+<span class="code-keyword">public function</span> <span class="code-function">quiz</span>(<span class="code-keyword">$index</span> = 0) {
+    <span class="code-comment">// Démarre la session PHP</span>
+    <span class="code-keyword">session_start</span>();
+    
+    <span class="code-comment">// Charge toutes les questions</span>
+    <span class="code-keyword">$questionModel</span> = <span class="code-keyword">$this</span>->model(<span class="code-string">'Question'</span>);
+    <span class="code-keyword">$questions</span> = <span class="code-keyword">$questionModel</span>->getAllQuiz();
+    
+    <span class="code-comment">// Initialise le score de session (première fois)</span>
+    <span class="code-keyword">if</span> (!isset(<span class="code-keyword">$_SESSION</span>[<span class="code-string">'quiz_score'</span>])) {
+        <span class="code-keyword">$_SESSION</span>[<span class="code-string">'quiz_score'</span>] = 0;
+        <span class="code-keyword">$_SESSION</span>[<span class="code-string">'quiz_total'</span>] = 0;
+    }
+    
+    <span class="code-comment">// Vérifie si le quiz est fini</span>
+    <span class="code-keyword">if</span> (<span class="code-keyword">$index</span> >= <span class="code-keyword">count</span>(<span class="code-keyword">$questions</span>)) {
+        <span class="code-comment">// Affiche le résumé final</span>
+        <span class="code-keyword">$this</span>->view(<span class="code-string">'game/quiz_finished'</span>, [
+            <span class="code-string">'score'</span> => <span class="code-keyword">$_SESSION</span>[<span class="code-string">'quiz_score'</span>],
+            <span class="code-string">'total'</span> => <span class="code-keyword">$_SESSION</span>[<span class="code-string">'quiz_total'</span>]
+        ]);
+        <span class="code-comment">// Réinitialise la session</span>
+        <span class="code-keyword">unset</span>(<span class="code-keyword">$_SESSION</span>[<span class="code-string">'quiz_score'</span>]);
+        <span class="code-keyword">unset</span>(<span class="code-keyword">$_SESSION</span>[<span class="code-string">'quiz_total'</span>]);
+        <span class="code-keyword">return</span>;
+    }
+    
+    <span class="code-comment">// Affiche la question actuelle</span>
+    <span class="code-keyword">$this</span>->view(<span class="code-string">'game/quiz'</span>, [
+        <span class="code-string">'question'</span> => <span class="code-keyword">$questions</span>[<span class="code-keyword">$index</span>],
+        <span class="code-string">'currentIndex'</span> => <span class="code-keyword">$index</span>,
+        <span class="code-string">'totalQuestions'</span> => <span class="code-keyword">count</span>(<span class="code-keyword">$questions</span>),
+        <span class="code-string">'score'</span> => <span class="code-keyword">$_SESSION</span>[<span class="code-string">'quiz_score'</span>]
+    ]);
+}
+    </div>
+
+    <h3>2. Vérification de la Réponse</h3>
+
+    <div class="code-block">
+<span class="code-keyword">public function</span> <span class="code-function">quizcheck</span>() {
+    <span class="code-comment">// Vérifie que c'est une requête POST</span>
+    <span class="code-keyword">if</span> (<span class="code-keyword">$_SERVER</span>[<span class="code-string">'REQUEST_METHOD'</span>] == <span class="code-string">'POST'</span>) {
+        <span class="code-keyword">session_start</span>();
+        
+        <span class="code-comment">// Récupère les données de la réponse</span>
+        <span class="code-keyword">$id</span> = <span class="code-keyword">$_POST</span>[<span class="code-string">'id'</span>];
+        <span class="code-keyword">$choice</span> = <span class="code-keyword">$_POST</span>[<span class="code-string">'choice'</span>];
+        <span class="code-keyword">$currentIndex</span> = <span class="code-keyword">$_POST</span>[<span class="code-string">'currentIndex'</span>];
+        
+        <span class="code-comment">// Charge la question</span>
+        <span class="code-keyword">$questionModel</span> = <span class="code-keyword">$this</span>->model(<span class="code-string">'Question'</span>);
+        <span class="code-keyword">$question</span> = <span class="code-keyword">$questionModel</span>->getQuizById(<span class="code-keyword">$id</span>);
+        
+        <span class="code-comment">// Vérifie si la réponse est correcte</span>
+        <span class="code-keyword">$isCorrect</span> = (<span class="code-keyword">$question</span>[<span class="code-string">'answer'</span>] == <span class="code-keyword">$choice</span>);
+        
+        <span class="code-comment">// Met à jour le score de session</span>
+        <span class="code-keyword">$_SESSION</span>[<span class="code-string">'quiz_total'</span>]++;
+        <span class="code-keyword">if</span> (<span class="code-keyword">$isCorrect</span>) {
+            <span class="code-keyword">$_SESSION</span>[<span class="code-string">'quiz_score'</span>]++;
+        }
+        
+        <span class="code-comment">// Affiche la vue avec le feedback</span>
+        <span class="code-keyword">$this</span>->view(<span class="code-string">'game/quiz'</span>, [
+            <span class="code-string">'question'</span> => <span class="code-keyword">$question</span>,
+            <span class="code-string">'isCorrect'</span> => <span class="code-keyword">$isCorrect</span>,
+            <span class="code-string">'choice'</span> => <span class="code-keyword">$choice</span>,
+            <span class="code-string">'nextIndex'</span> => <span class="code-keyword">$currentIndex</span> + 1,
+            <span class="code-string">'score'</span> => <span class="code-keyword">$_SESSION</span>[<span class="code-string">'quiz_score'</span>],
+            <span class="code-string">'total'</span> => <span class="code-keyword">$_SESSION</span>[<span class="code-string">'quiz_total'</span>]
+        ]);
+    }
+}
+    </div>
+
+    <div class="explanation">
+        <strong>Processus:</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">1. Récupère l'index de la question actuelle</li>
+            <li class="list-item">2. Compare la réponse soumise avec la bonne réponse</li>
+            <li class="list-item">3. Incrémente le total et le score si correct</li>
+            <li class="list-item">4. Passe à la question suivante (nextIndex = currentIndex + 1)</li>
+        </ul>
+    </div>
+
+    <h2>Gestion de la Session</h2>
+
+    <div class="key-point">
+        La session PHP stocke deux variables:
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">quiz_score: Nombre de bonnes réponses</li>
+            <li class="list-item">quiz_total: Nombre total de questions répondues</li>
+        </ul>
+    </div>
+
+    <h2>Flux de Jeu</h2>
+
+    <div class="flow-diagram">
+        <div class="flow-step">Quiz Start</div>
+        <span class="arrow">→</span>
+        <div class="flow-step">Question 1/5</div>
+        <br><br>
+        <div class="flow-step">Utilisateur répond</div>
+        <span class="arrow">→</span>
+        <div class="flow-step">Vérification</div>
+        <br><br>
+        <div class="flow-step">Score mis à jour</div>
+        <span class="arrow">→</span>
+        <div class="flow-step">Question suivante</div>
+        <br><br>
+        <div class="flow-step">Dernier?</div>
+        <span class="arrow">→</span>
+        <div class="flow-step">Résumé final</div>
+    </div>
+</div>
+
+<!-- PAGE 6: JEU 3 - FACT/FICTION -->
+<div class="page">
+    <h1>Jeu 3: Fait ou Fiction</h1>
+    
+    <div class="learning-objective">
+        <strong>Type:</strong> Binaire (Vrai/Faux) | <strong>Mécanique:</strong> Identifier les faits vrais
+    </div>
+
+    <h2>Description du Jeu</h2>
+    
+    <div class="intro-section">
+        <h3>Concept</h3>
+        <p>
+            L'utilisateur lit des affirmations et doit déterminer si elles sont <strong>Vraies ou Fausses</strong>.
+            C'est un exercice de fact-checking et de pensée critique pour identifier les mythes urbains
+            et les fausses croyances.
+        </p>
+    </div>
+
+    <h2>Exemples de Données</h2>
+
+    <div class="code-block">
+{
+    <span class="code-string">"factfiction"</span>: [
+        {
+            <span class="code-string">"id"</span>: 1,
+            <span class="code-string">"statement"</span>: <span class="code-string">"Nous n'utilisons que 10% de notre cerveau."</span>,
+            <span class="code-string">"is_fact"</span>: <span class="code-keyword">false</span>,
+            <span class="code-string">"explanation"</span>: <span class="code-string">"C'est un mythe. L'imagerie montre que..."</span>
+        },
+        {
+            <span class="code-string">"id"</span>: 4,
+            <span class="code-string">"statement"</span>: <span class="code-string">"L'ancrage cognitif consiste à se fier à la première info."</span>,
+            <span class="code-string">"is_fact"</span>: <span class="code-keyword">true</span>,
+            <span class="code-string">"explanation"</span>: <span class="code-string">"C'est un biais cognitif bien connu..."</span>
+        }
+    ]
+}
+    </div>
+
+    <div class="explanation">
+        <strong>Structure:</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">id: Identifiant unique</li>
+            <li class="list-item">statement: L'affirmation à évaluer</li>
+            <li class="list-item">is_fact: Boolean (true = vrai, false = faux)</li>
+            <li class="list-item">explanation: Explication de la réponse</li>
+        </ul>
+    </div>
+
+    <h2>Logique du Controller</h2>
+
+    <h3>1. Initialisation</h3>
+
+    <div class="code-block">
+<span class="code-keyword">public function</span> <span class="code-function">fact</span>(<span class="code-keyword">$index</span> = 0) {
+    <span class="code-keyword">session_start</span>();
+    
+    <span class="code-comment">// Charge toutes les affirmations</span>
+    <span class="code-keyword">$questionModel</span> = <span class="code-keyword">$this</span>->model(<span class="code-string">'Question'</span>);
+    <span class="code-keyword">$questions</span> = <span class="code-keyword">$questionModel</span>->getAllFactFiction();
+    
+    <span class="code-comment">// Initialise les variables de session</span>
+    <span class="code-keyword">if</span> (!isset(<span class="code-keyword">$_SESSION</span>[<span class="code-string">'fact_score'</span>])) {
+        <span class="code-keyword">$_SESSION</span>[<span class="code-string">'fact_score'</span>] = 0;
+        <span class="code-keyword">$_SESSION</span>[<span class="code-string">'fact_total'</span>] = 0;
+    }
+    
+    <span class="code-comment">// Vérifie la fin du jeu</span>
+    <span class="code-keyword">if</span> (<span class="code-keyword">$index</span> >= <span class="code-keyword">count</span>(<span class="code-keyword">$questions</span>)) {
+        <span class="code-keyword">$this</span>->view(<span class="code-string">'game/fact_finished'</span>, [
+            <span class="code-string">'score'</span> => <span class="code-keyword">$_SESSION</span>[<span class="code-string">'fact_score'</span>],
+            <span class="code-string">'total'</span> => <span class="code-keyword">$_SESSION</span>[<span class="code-string">'fact_total'</span>]
+        ]);
+        <span class="code-keyword">unset</span>(<span class="code-keyword">$_SESSION</span>[<span class="code-string">'fact_score'</span>]);
+        <span class="code-keyword">unset</span>(<span class="code-keyword">$_SESSION</span>[<span class="code-string">'fact_total'</span>]);
+        <span class="code-keyword">return</span>;
+    }
+    
+    <span class="code-keyword">$this</span>->view(<span class="code-string">'game/fact'</span>, [
+        <span class="code-string">'question'</span> => <span class="code-keyword">$questions</span>[<span class="code-keyword">$index</span>],
+        <span class="code-string">'currentIndex'</span> => <span class="code-keyword">$index</span>,
+        <span class="code-string">'totalQuestions'</span> => <span class="code-keyword">count</span>(<span class="code-keyword">$questions</span>),
+        <span class="code-string">'score'</span> => <span class="code-keyword">$_SESSION</span>[<span class="code-string">'fact_score'</span>]
+    ]);
+}
+    </div>
+
+    <h3>2. Vérification de la Réponse</h3>
+
+    <div class="code-block">
+<span class="code-keyword">public function</span> <span class="code-function">factcheck</span>() {
+    <span class="code-keyword">if</span> (<span class="code-keyword">$_SERVER</span>[<span class="code-string">'REQUEST_METHOD'</span>] == <span class="code-string">'POST'</span>) {
+        <span class="code-keyword">session_start</span>();
+        
+        <span class="code-comment">// Récupère la réponse (string 'true' ou 'false')</span>
+        <span class="code-keyword">$id</span> = <span class="code-keyword">$_POST</span>[<span class="code-string">'id'</span>];
+        <span class="code-keyword">$choice</span> = <span class="code-keyword">$_POST</span>[<span class="code-string">'choice'</span>] === <span class="code-string">'true'</span>;
+        <span class="code-keyword">$currentIndex</span> = <span class="code-keyword">$_POST</span>[<span class="code-string">'currentIndex'</span>];
+        
+        <span class="code-comment">// Charge la question/affirmation</span>
+        <span class="code-keyword">$questionModel</span> = <span class="code-keyword">$this</span>->model(<span class="code-string">'Question'</span>);
+        <span class="code-keyword">$question</span> = <span class="code-keyword">$questionModel</span>->getFactFictionById(<span class="code-keyword">$id</span>);
+        
+        <span class="code-comment">// Vérifie si la réponse est correcte</span>
+        <span class="code-comment">// Compare le booléen de la réponse avec is_fact</span>
+        <span class="code-keyword">$isCorrect</span> = (<span class="code-keyword">$question</span>[<span class="code-string">'is_fact'</span>] == <span class="code-keyword">$choice</span>);
+        
+        <span class="code-comment">// Met à jour le score</span>
+        <span class="code-keyword">$_SESSION</span>[<span class="code-string">'fact_total'</span>]++;
+        <span class="code-keyword">if</span> (<span class="code-keyword">$isCorrect</span>) {
+            <span class="code-keyword">$_SESSION</span>[<span class="code-string">'fact_score'</span>]++;
+        }
+        
+        <span class="code-keyword">$this</span>->view(<span class="code-string">'game/fact'</span>, [
+            <span class="code-string">'question'</span> => <span class="code-keyword">$question</span>,
+            <span class="code-string">'isCorrect'</span> => <span class="code-keyword">$isCorrect</span>,
+            <span class="code-string">'choice'</span> => <span class="code-keyword">$choice</span>,
+            <span class="code-string">'nextIndex'</span> => <span class="code-keyword">$currentIndex</span> + 1,
+            <span class="code-string">'score'</span> => <span class="code-keyword">$_SESSION</span>[<span class="code-string">'fact_score'</span>],
+            <span class="code-string">'total'</span> => <span class="code-keyword">$_SESSION</span>[<span class="code-string">'fact_total'</span>]
+        ]);
+    }
+}
+    </div>
+
+    <div class="explanation">
+        <strong>Points importants:</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">La réponse arrive en string ("true" ou "false") via POST</li>
+            <li class="list-item">=== 'true' convertit la string en booléen</li>
+            <li class="list-item">Comparaison directe: is_fact == choice</li>
+            <li class="list-item">Même structure de session que le quiz</li>
+        </ul>
+    </div>
+
+    <h2>Comparaison Quiz vs Fact/Fiction</h2>
+
+    <table>
+        <tr>
+            <th>Aspect</th>
+            <th>Quiz</th>
+            <th>Fact/Fiction</th>
+        </tr>
+        <tr>
+            <td><strong>Type de réponse</strong></td>
+            <td>4 choix (0-3)</td>
+            <td>2 choix (true/false)</td>
+        </tr>
+        <tr>
+            <td><strong>Vérification</strong></td>
+            <td>answer == choice</td>
+            <td>is_fact == choice</td>
+        </tr>
+        <tr>
+            <td><strong>Complexité</strong></td>
+            <td>Plus d'options = plus difficile</td>
+            <td>Plus simple mais trompeuse</td>
+        </tr>
+        <tr>
+            <td><strong>Apprentissage</strong></td>
+            <td>Connaissance théorique</td>
+            <td>Fact-checking pratique</td>
+        </tr>
+    </table>
+</div>
+
+<!-- PAGE 7: AUTHENTIFICATION -->
+<div class="page">
+    <h1>Système d'Authentification</h1>
+    
+    <div class="learning-objective">
+        <strong>Mécanisme:</strong> Session PHP | <strong>Sécurité:</strong> Password hashing avec bcrypt
+    </div>
+
+    <h2>Gestion des Utilisateurs</h2>
+
+    <div class="explanation">
+        Les utilisateurs sont stockés en base de données avec des mots de passe hashés de manière
+        sécurisée. Chaque session utilisateur est gérée par PHP avec des identifiants de session.
+    </div>
+
+    <h2>1. Inscription (Signup)</h2>
+
+    <div class="code-block">
+<span class="code-keyword">public function</span> <span class="code-function">signup</span>() {
+    <span class="code-comment">// Vérifie que c'est une requête POST</span>
+    <span class="code-keyword">if</span> (<span class="code-keyword">$_SERVER</span>[<span class="code-string">'REQUEST_METHOD'</span>] !== <span class="code-string">'POST'</span>) {
+        <span class="code-keyword">echo</span> json_encode([
+            <span class="code-string">'success'</span> => <span class="code-keyword">false</span>,
+            <span class="code-string">'message'</span> => <span class="code-string">'Méthode non autorisée'</span>
+        ]);
+        <span class="code-keyword">return</span>;
+    }
+
+    <span class="code-comment">// Récupère les données du formulaire</span>
+    <span class="code-keyword">$username</span> = <span class="code-keyword">$_POST</span>[<span class="code-string">'username'</span>] ?? <span class="code-string">''</span>;
+    <span class="code-keyword">$email</span> = <span class="code-keyword">$_POST</span>[<span class="code-string">'email'</span>] ?? <span class="code-string">''</span>;
+    <span class="code-keyword">$password</span> = <span class="code-keyword">$_POST</span>[<span class="code-string">'password'</span>] ?? <span class="code-string">''</span>;
+
+    <span class="code-comment">// Validation 1: Tous les champs sont obligatoires</span>
+    <span class="code-keyword">if</span> (<span class="code-keyword">empty</span>(<span class="code-keyword">$username</span>) || <span class="code-keyword">empty</span>(<span class="code-keyword">$email</span>) || <span class="code-keyword">empty</span>(<span class="code-keyword">$password</span>)) {
+        <span class="code-keyword">echo</span> json_encode([
+            <span class="code-string">'success'</span> => <span class="code-keyword">false</span>,
+            <span class="code-string">'message'</span> => <span class="code-string">'Veuillez remplir tous les champs'</span>
+        ]);
+        <span class="code-keyword">return</span>;
+    }
+
+    <span class="code-comment">// Validation 2: L'email n'existe pas déjà</span>
+    <span class="code-keyword">$userModel</span> = <span class="code-keyword">new</span> User(<span class="code-keyword">$db</span>);
+    <span class="code-keyword">if</span> (<span class="code-keyword">$userModel</span>->emailExists(<span class="code-keyword">$email</span>)) {
+        <span class="code-keyword">echo</span> json_encode([
+            <span class="code-string">'success'</span> => <span class="code-keyword">false</span>,
+            <span class="code-string">'message'</span> => <span class="code-string">'Cet email est déjà utilisé'</span>
+        ]);
+        <span class="code-keyword">return</span>;
+    }
+
+    <span class="code-comment">// Création du compte avec password hashé</span>
+    <span class="code-keyword">if</span> (<span class="code-keyword">$userModel</span>->create(<span class="code-keyword">$username</span>, <span class="code-keyword">$email</span>, <span class="code-keyword">$password</span>)) {
+        <span class="code-comment">// Récupère l'utilisateur créé</span>
+        <span class="code-keyword">$user</span> = <span class="code-keyword">$userModel</span>->findByEmail(<span class="code-keyword">$email</span>);
+        
+        <span class="code-comment">// Crée la session PHP</span>
+        <span class="code-keyword">session_start</span>();
+        <span class="code-keyword">$_SESSION</span>[<span class="code-string">'user_id'</span>] = <span class="code-keyword">$user</span>[<span class="code-string">'id'</span>];
+        <span class="code-keyword">$_SESSION</span>[<span class="code-string">'username'</span>] = <span class="code-keyword">$user</span>[<span class="code-string">'username'</span>];
+        
+        <span class="code-keyword">echo</span> json_encode([<span class="code-string">'success'</span> => <span class="code-keyword">true</span>]);
+    } else {
+        <span class="code-keyword">echo</span> json_encode([
+            <span class="code-string">'success'</span> => <span class="code-keyword">false</span>,
+            <span class="code-string">'message'</span> => <span class="code-string">'Erreur lors de la création du compte'</span>
+        ]);
+    }
+}
+    </div>
+
+    <h2>2. Connexion (Login)</h2>
+
+    <div class="code-block">
+<span class="code-keyword">public function</span> <span class="code-function">login</span>() {
+    <span class="code-keyword">if</span> (<span class="code-keyword">$_SERVER</span>[<span class="code-string">'REQUEST_METHOD'</span>] !== <span class="code-string">'POST'</span>) {
+        <span class="code-keyword">echo</span> json_encode([
+            <span class="code-string">'success'</span> => <span class="code-keyword">false</span>,
+            <span class="code-string">'message'</span> => <span class="code-string">'Méthode non autorisée'</span>
+        ]);
+        <span class="code-keyword">return</span>;
+    }
+
+    <span class="code-keyword">$email</span> = <span class="code-keyword">$_POST</span>[<span class="code-string">'email'</span>] ?? <span class="code-string">''</span>;
+    <span class="code-keyword">$password</span> = <span class="code-keyword">$_POST</span>[<span class="code-string">'password'</span>] ?? <span class="code-string">''</span>;
+
+    <span class="code-comment">// Validation des champs</span>
+    <span class="code-keyword">if</span> (<span class="code-keyword">empty</span>(<span class="code-keyword">$email</span>) || <span class="code-keyword">empty</span>(<span class="code-keyword">$password</span>)) {
+        <span class="code-keyword">echo</span> json_encode([
+            <span class="code-string">'success'</span> => <span class="code-keyword">false</span>,
+            <span class="code-string">'message'</span> => <span class="code-string">'Veuillez remplir tous les champs'</span>
+        ]);
+        <span class="code-keyword">return</span>;
+    }
+
+    <span class="code-comment">// Cherche l'utilisateur par email</span>
+    <span class="code-keyword">$userModel</span> = <span class="code-keyword">new</span> User(<span class="code-keyword">$db</span>);
+    <span class="code-keyword">$user</span> = <span class="code-keyword">$userModel</span>->findByEmail(<span class="code-keyword">$email</span>);
+
+    <span class="code-comment">// Vérifie le password avec password_verify (hashing sécurisé)</span>
+    <span class="code-keyword">if</span> (<span class="code-keyword">$user</span> && <span class="code-keyword">password_verify</span>(<span class="code-keyword">$password</span>, <span class="code-keyword">$user</span>[<span class="code-string">'password'</span>])) {
+        <span class="code-comment">// Identifiants valides: crée la session</span>
+        <span class="code-keyword">session_start</span>();
+        <span class="code-keyword">$_SESSION</span>[<span class="code-string">'user_id'</span>] = <span class="code-keyword">$user</span>[<span class="code-string">'id'</span>];
+        <span class="code-keyword">$_SESSION</span>[<span class="code-string">'username'</span>] = <span class="code-keyword">$user</span>[<span class="code-string">'username'</span>];
+        
+        <span class="code-keyword">echo</span> json_encode([<span class="code-string">'success'</span> => <span class="code-keyword">true</span>]);
+    } else {
+        <span class="code-comment">// Identifiants invalides</span>
+        <span class="code-keyword">echo</span> json_encode([
+            <span class="code-string">'success'</span> => <span class="code-keyword">false</span>,
+            <span class="code-string">'message'</span> => <span class="code-string">'Email ou mot de passe incorrect'</span>
+        ]);
+    }
+}
+    </div>
+
+    <div class="key-point">
+        <strong>Sécurité:</strong> password_verify() compare le mot de passe saisi avec le hash stocké.
+        Le mot de passe n'est jamais stocké en clair - seul le hash est conservé en base.
+    </div>
+
+    <h2>3. Déconnexion (Logout)</h2>
+
+    <div class="code-block">
+<span class="code-keyword">public function</span> <span class="code-function">logout</span>() {
+    <span class="code-keyword">session_start</span>();
+    <span class="code-keyword">session_unset</span>();      <span class="code-comment">// Efface les variables de session</span>
+    <span class="code-keyword">session_destroy</span>();    <span class="code-comment">// Détruit la session</span>
+    <span class="code-keyword">header</span>(<span class="code-string">'Location: /Game_critical_thinking/public/'</span>);
+    <span class="code-keyword">exit</span>;
+}
+    </div>
+
+    <h2>Flux d'Authentification</h2>
+
+    <div class="flow-diagram">
+        <div class="flow-step">Inscription</div>
+        <span class="arrow">→</span>
+        <div class="flow-step">Validation</div>
+        <br><br>
+        <div class="flow-step">Hash Password</div>
+        <span class="arrow">→</span>
+        <div class="flow-step">Création User</div>
+        <br><br>
+        <div class="flow-step">Session démarrée</div>
+        <span class="arrow">→</span>
+        <div class="flow-step">Utilisateur connecté</div>
+    </div>
+
+    <div style="margin-top: 30px; padding: 20px; background: #e3f2fd; border-radius: 4px;">
+        <strong>Données stockées en session:</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">user_id: Identifiant unique de l'utilisateur</li>
+            <li class="list-item">username: Nom d'utilisateur</li>
+            <li class="list-item">quiz_score / quiz_total: Score du quiz</li>
+            <li class="list-item">fact_score / fact_total: Score du fact/fiction</li>
+        </ul>
+    </div>
+</div>
+
+<!-- PAGE 8: ARCHITECTURE BASE DE DONNÉES -->
+<div class="page">
+    <h1>Architecture Base de Données</h1>
+    
+    <h2>Tables Principales</h2>
+
+    <h3>1. Table: users</h3>
+
+    <div class="code-block">
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+    </div>
+
+    <div class="explanation">
+        <strong>Colonnes:</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">id: Clé primaire, auto-incrémentée</li>
+            <li class="list-item">username: Nom unique de l'utilisateur</li>
+            <li class="list-item">email: Email unique (adresse de connexion)</li>
+            <li class="list-item">password: Hash du mot de passe (sha256 ou bcrypt)</li>
+            <li class="list-item">created_at: Date/heure de création du compte</li>
+        </ul>
+    </div>
+
+    <h3>2. Table: situations (Puzzle)</h3>
+
+    <div class="code-block">
+CREATE TABLE situations (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(200) NOT NULL,
+    description TEXT,
+    category VARCHAR(100),
+    difficulty INT DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+    </div>
+
+    <div class="explanation">
+        <strong>Colonnes:</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">id: Identifiant de la situation</li>
+            <li class="list-item">title: Titre du défi (ex: "Organiser un événement")</li>
+            <li class="list-item">description: Description longue du contexte</li>
+            <li class="list-item">category: Type de situation (travail, personnel, etc)</li>
+            <li class="list-item">difficulty: Niveau de difficulté (1-5)</li>
+        </ul>
+    </div>
+
+    <h3>3. Table: steps (Étapes du Puzzle)</h3>
+
+    <div class="code-block">
+CREATE TABLE steps (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    situation_id INT NOT NULL,
+    step_text VARCHAR(500),
+    step_order INT NOT NULL,
+    FOREIGN KEY (situation_id) REFERENCES situations(id)
+);
+    </div>
+
+    <div class="explanation">
+        <strong>Relationship:</strong> Une situation possède plusieurs étapes
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">id: Identifiant unique d'une étape</li>
+            <li class="list-item">situation_id: Référence à la situation (Foreign Key)</li>
+            <li class="list-item">step_text: Description de l'étape à classifier</li>
+            <li class="list-item">step_order: Position correcte (1, 2, 3, etc)</li>
+        </ul>
+    </div>
+
+    <h3>4. Table: questions (Quiz)</h3>
+
+    <div class="code-block">
+CREATE TABLE questions (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    type ENUM('quiz', 'factfiction') NOT NULL,
+    question_text TEXT NOT NULL,
+    option_a VARCHAR(255),
+    option_b VARCHAR(255),
+    option_c VARCHAR(255),
+    option_d VARCHAR(255),
+    answer INT,
+    is_fact BOOLEAN,
+    explanation TEXT,
+    difficulty INT DEFAULT 1
+);
+    </div>
+
+    <div class="explanation">
+        <strong>Colonnes:</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">type: 'quiz' (4 choix) ou 'factfiction' (vrai/faux)</li>
+            <li class="list-item">question_text: La question ou affirmation</li>
+            <li class="list-item">option_a/b/c/d: Les 4 options (null pour fact/fiction)</li>
+            <li class="list-item">answer: Index de la bonne réponse (0-3)</li>
+            <li class="list-item">is_fact: Boolean pour fact/fiction</li>
+            <li class="list-item">explanation: Explication pédagogique</li>
+        </ul>
+    </div>
+
+    <h2>Diagramme de Relations</h2>
+
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 4px; font-family: monospace; font-size: 0.9em; margin: 20px 0;">
+        <strong>users (1) ←→ (N) game_scores</strong>
+        <br>Un utilisateur a plusieurs résultats
+        <br><br>
+        <strong>situations (1) ←→ (N) steps</strong>
+        <br>Une situation a plusieurs étapes
+        <br><br>
+        <strong>questions (type=quiz ou factfiction)</strong>
+        <br>Une table pour 2 types de jeux
+    </div>
+
+    <h2>Opérations de Base Données</h2>
+
+    <h3>Requête: Obtenir une situation aléatoire</h3>
+
+    <div class="code-block">
+<span class="code-keyword">SELECT</span> * <span class="code-keyword">FROM</span> situations 
+<span class="code-keyword">ORDER BY</span> <span class="code-keyword">RAND</span>() 
+<span class="code-keyword">LIMIT</span> 1;
+
+<span class="code-comment">-- Résultat: Une situation au hasard</span>
+    </div>
+
+    <h3>Requête: Obtenir les étapes d'une situation</h3>
+
+    <div class="code-block">
+<span class="code-keyword">SELECT</span> id, step_text, step_order 
+<span class="code-keyword">FROM</span> steps 
+<span class="code-keyword">WHERE</span> situation_id = ? 
+<span class="code-keyword">ORDER BY</span> step_order <span class="code-keyword">ASC</span>;
+
+<span class="code-comment">-- Résultat: Étapes triées dans le bon ordre</span>
+    </div>
+
+    <h3>Requête: Vérifier une réponse au quiz</h3>
+
+    <div class="code-block">
+<span class="code-keyword">SELECT</span> answer, explanation 
+<span class="code-keyword">FROM</span> questions 
+<span class="code-keyword">WHERE</span> id = ? <span class="code-keyword">AND</span> type = <span class="code-string">'quiz'</span>;
+
+<span class="code-comment">-- Compare answer avec user_choice</span>
+    </div>
+
+    <h3>Requête: Créer un utilisateur</h3>
+
+    <div class="code-block">
+<span class="code-keyword">INSERT INTO</span> users (username, email, password, created_at)
+<span class="code-keyword">VALUES</span> (?, ?, ?, <span class="code-keyword">NOW</span>());
+
+<span class="code-comment">-- password = password_hash($password, PASSWORD_BCRYPT)</span>
+    </div>
+</div>
+
+<!-- PAGE 9: STACK TECHNOLOGIQUE -->
+<div class="page">
+    <h1>Stack Technologique & Résumé</h1>
+    
+    <h2>Technologies Utilisées</h2>
+
+    <table>
+        <tr>
+            <th>Couche</th>
+            <th>Technologie</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>Backend</strong></td>
+            <td>PHP 7.4+</td>
+            <td>Serveur et logique métier</td>
+        </tr>
+        <tr>
+            <td><strong>Architecture</strong></td>
+            <td>MVC Pattern</td>
+            <td>Séparation Model/View/Controller</td>
+        </tr>
+        <tr>
+            <td><strong>Base de Données</strong></td>
+            <td>MySQL 8.0</td>
+            <td>Stockage persistent des données</td>
+        </tr>
+        <tr>
+            <td><strong>Frontend</strong></td>
+            <td>HTML5 / CSS3 / JavaScript</td>
+            <td>Interface utilisateur interactive</td>
+        </tr>
+        <tr>
+            <td><strong>Sessions</strong></td>
+            <td>PHP Sessions</td>
+            <td>Gestion de l'authentification utilisateur</td>
+        </tr>
+        <tr>
+            <td><strong>Sécurité</strong></td>
+            <td>bcrypt / password_hash()</td>
+            <td>Hashing sécurisé des mots de passe</td>
+        </tr>
+    </table>
+
+    <h2>Résumé des 4 Jeux</h2>
+
+    <table style="margin-top: 30px;">
+        <tr>
+            <th>Jeu</th>
+            <th>Type</th>
+            <th>Mécanique Clé</th>
+            <th>Variables Session</th>
+        </tr>
+        <tr>
+            <td><strong>1. Puzzle</strong></td>
+            <td>Ordonnancement</td>
+            <td>shuffle() + checkOrder()</td>
+            <td>N/A (sans score)</td>
+        </tr>
+        <tr>
+            <td><strong>2. Quiz</strong></td>
+            <td>Choix multiple</td>
+            <td>answer == choice</td>
+            <td>quiz_score, quiz_total</td>
+        </tr>
+        <tr>
+            <td><strong>3. Fact/Fiction</strong></td>
+            <td>Binaire</td>
+            <td>is_fact == choice</td>
+            <td>fact_score, fact_total</td>
+        </tr>
+        <tr>
+            <td><strong>4. Mind Puzzle</strong></td>
+            <td>Déduction</td>
+            <td>À implémenter</td>
+            <td>À définir</td>
+        </tr>
+    </table>
+
+    <h2>Clés de l'Implémentation</h2>
+
+    <div class="key-point">
+        <strong>Sécurité</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">Requêtes préparées pour éviter l'injection SQL</li>
+            <li class="list-item">password_verify() pour le hashing sécurisé</li>
+            <li class="list-item">Validation des données en POST</li>
+        </ul>
+    </div>
+
+    <div class="key-point">
+        <strong>Performance</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">Requête RAND() MySQL pour l'aléatoire côté base</li>
+            <li class="list-item">shuffle() côté application pour les étapes</li>
+            <li class="list-item">Sessions PHP stockées côté serveur</li>
+        </ul>
+    </div>
+
+    <div class="key-point">
+        <strong>Maintenabilité</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">Pattern MVC pour une organisation claire</li>
+            <li class="list-item">Séparation des responsabilités (Model/View/Controller)</li>
+            <li class="list-item">Code commenté et noms explicites</li>
+        </ul>
+    </div>
+
+    <h2>Cas d'Usage Typique: Jouer au Quiz</h2>
+
+    <div class="flow-diagram">
+        1. Utilisateur accède /game/quiz
+        <br>↓
+        <br>2. GameController::quiz(0) est appelé
+        <br>↓
+        <br>3. Charge les questions depuis la DB
+        <br>↓
+        <br>4. Initialise $_SESSION['quiz_score'] = 0
+        <br>↓
+        <br>5. Affiche la question 1
+        <br>↓
+        <br>6. Utilisateur répond
+        <br>↓
+        <br>7. POST vers GameController::quizcheck()
+        <br>↓
+        <br>8. Vérification de la réponse
+        <br>↓
+        <br>9. Score mis à jour
+        <br>↓
+        <br>10. Affiche question 2...
+    </div>
+
+    <h2>Schéma Global de l'Application</h2>
+
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 4px; margin: 20px 0; text-align: center;">
+        <strong>Utilisateur</strong>
+        <br>↓<br>
+        <strong>Navigateur (HTTP)</strong>
+        <br>↓<br>
+        <strong>GameController</strong>
+        <br>↓<br>
+        <strong>Game Model / Question Model</strong>
+        <br>↓<br>
+        <strong>MySQL Database</strong>
+        <br>↓<br>
+        <strong>Tables: users, situations, steps, questions</strong>
+        <br><br>
+        <strong>Sessions PHP:</strong> Stockées côté serveur
+    </div>
+
+    <h2>Conclusion</h2>
+
+    <div class="learning-objective">
+        <strong>Objectif atteint:</strong> Vous avez maintenant une compréhension complète de:
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">L'architecture MVC du projet</li>
+            <li class="list-item">La logique métier de chaque jeu</li>
+            <li class="list-item">Le système d'authentification sécurisé</li>
+            <li class="list-item">La gestion des sessions et scores</li>
+            <li class="list-item">La structure de la base de données</li>
+            <li class="list-item">Les patterns de sécurité utilisés</li>
+        </ul>
+    </div>
+
+    <h2>Recommandations pour l'Évolution</h2>
+
+    <div style="background: #fff3cd; padding: 20px; border-radius: 4px; border-left: 4px solid #ffc107; margin-top: 20px;">
+        <strong>Améliorations futures:</strong>
+        <ul class="list-item" style="list-style: none;">
+            <li class="list-item">Implémenter le 4ème jeu (Mind Puzzle Challenge)</li>
+            <li class="list-item">Ajouter un système de classement (leaderboard)</li>
+            <li class="list-item">Stocker les résultats par jeu et par utilisateur</li>
+            <li class="list-item">Ajouter des statistiques détaillées par utilisateur</li>
+            <li class="list-item">Implémenter un système d'badges/récompenses</li>
+            <li class="list-item">Ajouter des tests unitaires</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
